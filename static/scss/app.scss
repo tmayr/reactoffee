@@ -1,0 +1,84 @@
+@import "normalize";
+
+$primary-color: #37a7df;
+
+*{
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body{
+    font-family: 'Helvetica', 'Arial', 'sans-serif';
+    line-height: 1.6;
+}
+
+header{
+    height: 60px;
+    background: $primary-color;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.header-logo{
+    width: 200px;
+    height: 100%;
+    float: left;
+    background: darken($primary-color, 10%);
+}
+
+.header-nav{
+    float: right;
+    vertical-align: top;
+    line-height: 60px;
+
+    a{
+        color: white; text-decoration: none;
+        padding: 0 20px;
+        height: 100%;
+        display: inline-block;
+
+        &:last-child{
+            background: darken($primary-color, 10%);
+        }
+    }
+}
+
+
+.map{
+    background: #ccc;
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    .gm-style{ top: 60px !important; } // to offset the initial map position inside the map canvas by the header height
+}
+
+.shops-list{
+    width: 300px;
+    height: auto;
+    margin: 0;
+    padding: 10px 10px 0;
+    background: #eee;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 70px;
+    bottom: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    li{
+        background: white;
+        height: 100px;
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+    }
+}
