@@ -1,9 +1,8 @@
 const React = require("react");
-const Router = require("react-router");
+const {Route, DefaultRoute} = require("react-router");
 const Main = require("./Main");
 const App = require("./App");
 
-const {Route, DefaultRoute} = Router;
 
 /**
  * The React Routes for both the server and the client.

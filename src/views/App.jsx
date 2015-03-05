@@ -1,11 +1,17 @@
 const React = require("react");
 const Router = require('react-router');
+const Reflux = require('reflux');
+
+const ShopsStore = require('../stores/ShopsStore');
+const ShopsActions = require('../actions/ShopsActions');
 
 const Header = require("./Header");
 const GoogleMap = require('./GoogleMap');
 const ShopsList = require('./ShopsList');
 
+
 const App = React.createClass({
+    mixins: [Reflux.ListenerMixin],
     getInitialState() {
         return {}
     },
@@ -14,6 +20,7 @@ const App = React.createClass({
     },
     componentDidMount() {
         console.log("Hello client again");
+        ShopsActions.receiveItems()
     },
     render() {
         return (
