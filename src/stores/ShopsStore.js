@@ -1,12 +1,17 @@
 const React = require('react');
 const Reflux = require('reflux');
-const ShopsActions = require('../actions/ShopsActions');
+const Actions = require('../actions/Actions');
+
+var shops = require('../fixtures/ShopsFixtures');
 
 const ShopsStore = Reflux.createStore({
-    listenables: [ShopsActions],
-    onReceiveItems: function(){
-        console.log('wat')
-        alert('recieved items bro')
+    listenables: [Actions],
+    onReceiveItems(){
+        console.log('onReceiveItems triggered')
+    },
+
+    getInitialState(){
+        return {shops}
     }
 });
 

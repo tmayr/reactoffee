@@ -3,26 +3,20 @@ const Router = require('react-router');
 const Reflux = require('reflux');
 
 const ShopsStore = require('../stores/ShopsStore');
-const ShopsActions = require('../actions/ShopsActions');
+const Actions = require('../actions/Actions');
 
 const Header = require("./Header");
 const GoogleMap = require('./GoogleMap');
 const ShopsList = require('./ShopsList');
 
-
 const App = React.createClass({
-    mixins: [Reflux.ListenerMixin],
-    getInitialState() {
-        return {}
-    },
-    componentWillMount() {
-        console.log("Hello server and client");
-    },
+    mixins: [Reflux.connect(ShopsStore)],
     componentDidMount() {
-        console.log("Hello client again");
-        ShopsActions.receiveItems()
+        // Actions.receiveItems()
     },
+
     render() {
+        console.log(this.state)
         return (
             <div>
                 <Header />
