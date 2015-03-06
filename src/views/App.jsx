@@ -11,16 +11,12 @@ const ShopsList = require('./ShopsList');
 
 const App = React.createClass({
     mixins: [Reflux.connect(ShopsStore)],
-    componentDidMount() {
-        // Actions.receiveItems()
-    },
-
     render() {
         console.log(this.state)
         return (
             <div>
                 <Header />
-                <ShopsList />
+                <ShopsList shops={this.state.shops} />
                 <GoogleMap />
                 <Router.RouteHandler/>
             </div>
