@@ -12,6 +12,9 @@ const ListItem = React.createClass({
 
 export default React.createClass({
     mixins: [Reflux.connect(ShopsStore)],
+    componentWillReceiveProps(props){
+        console.log(props)
+    },
     render(){
         return (
             <ul className="shops-list">

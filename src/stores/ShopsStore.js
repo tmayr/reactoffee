@@ -14,8 +14,14 @@ var mapCenter = {
 const ShopsStore = Reflux.createStore({
     listenables: [Actions],
     onReceiveItems(){},
-    getInitialState(){
-        var shopsByDistance = _.sortBy(shops, function(shop){
+    onAcceptedGeolocation(data){
+        mapCenter.latitude = data.lat;
+        mapCenter.longitude = data.lng;
+
+        this.trigger({shops: this.updateShopsByDistance()});
+    },
+    updateShopsByDistance(){
+        return _.sortBy(shops, function(shop){
             shop.distance = haversine(mapCenter, {
                 'latitude': shop.lat,
                 'longitude': shop.lng
@@ -23,8 +29,9 @@ const ShopsStore = Reflux.createStore({
 
             return shop.distance;
         });
-
-        return {shops: shopsByDistance}
+    },
+    getInitialState(){
+        return {shops: this.updateShopsByDistance()}
     }
 });
 

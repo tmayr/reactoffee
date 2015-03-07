@@ -1,7 +1,8 @@
 const Reflux = require('reflux');
 
 const Actions = Reflux.createActions([
-    'receiveItems'
+    'receiveItems',
+    'acceptedGeolocation'
 ]);
 
 export default Actions;
