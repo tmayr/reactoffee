@@ -22,18 +22,20 @@ const App = React.createClass({
         }
     },
     handleAcceptedGeolocation(position){
-        Actions.acceptedGeolocation({
+        this.setState({
             geolocation_enabled: true,
             lat: position.coords.latitude,
             lng: position.coords.longitude
         });
+
+        Actions.acceptedGeolocation(this.state);
     },
     handleDeniedGeolocation(){},
     render() {
         return (
             <div>
                 <Header />
-                <ShopsList {...this.state} />
+                <ShopsList />
                 <GoogleMap />
                 <Router.RouteHandler/>
             </div>
