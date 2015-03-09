@@ -21,7 +21,13 @@ const ShopsStore = Reflux.createStore({
         mapCenter.latitude = data.lat;
         mapCenter.longitude = data.lng;
 
-        this.trigger({shops: this.updateShopsByDistance()});
+        this.trigger({
+            me: {
+                lat: data.lat,
+                lng: data.lng
+            },
+            shops: this.updateShopsByDistance()
+        });
     },
     updateShopsByDistance(){
         return _.sortBy(shops, function(shop){

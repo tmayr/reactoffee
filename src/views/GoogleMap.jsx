@@ -16,7 +16,10 @@ function toMarker(){
 }
 
 const GoogleMap = React.createClass({
-    mixins: [Reflux.connect(ShopsStore)],
+    mixins: [
+        Reflux.connect(ShopsStore),
+        Reflux.listenTo(ShopsStore,"onAcceptedGeolocation")
+    ],
     getInitialState(){
         return {
             map: false,
@@ -26,6 +29,9 @@ const GoogleMap = React.createClass({
     componentWillUpdate(){
         if(this.state.selectedShop.marker)
             this.state.selectedShop.marker.setAnimation(null);
+    },
+    onAcceptedGeolocation(){
+        this.state.map.setCenter(new google.maps.LatLng(this.state.me.lat, this.state.me.lng))
     },
     componentDidUpdate(){
         toMarker.apply(this);
