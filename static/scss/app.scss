@@ -47,7 +47,7 @@ header{
 }
 
 
-.map{
+.map-container{
     background: #ccc;
     height: 100%;
     width: 100%;
@@ -57,6 +57,7 @@ header{
     left: 0;
     z-index: 1;
 
+    #map{ width: 100%; height: 100%; }
     .gm-style{ top: 60px !important; } // to offset the initial map position inside the map canvas by the header height
 }
 

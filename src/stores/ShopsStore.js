@@ -15,7 +15,6 @@ const ShopsStore = Reflux.createStore({
     listenables: [Actions],
     onSelectedItem(id){
         var selectedShop = _.find(shops, function(shop){ return shop.id == id });
-        console.log(selectedShop)
         this.trigger({selectedShop: selectedShop})
     },
     onAcceptedGeolocation(data){
@@ -32,7 +31,7 @@ const ShopsStore = Reflux.createStore({
             }, {unit: 'm'});
 
             return shop.distance;
-        });
+        }.bind(this));
     },
     getInitialState(){
         return {shops: this.updateShopsByDistance(), selectedShop: {}}

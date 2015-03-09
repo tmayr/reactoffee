@@ -43,7 +43,6 @@ server.ext("onPreResponse", (request, reply) => {
 			<html lang="en-us">
 				<head>
                     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCdI-EvYancNazzk2Plj5rbjrZ6bJ9evJs&sensor=true&libraries=geometry"></script>
-
 					<meta charset="utf-8">
 					<title>Test</title>
 					<link rel="shortcut icon" href="/favicon.ico">

@@ -1,52 +1,64 @@
 const React = require("react");
 const Reflux = require("reflux");
-const {GoogleMapsMixin, Map, Marker} = require("react-google-maps");
 
 const ShopsStore = require('../stores/ShopsStore');
 
-function generateMarker(shop, index){
-    console.log(this.state)
-    return (
-        <Marker key={'shop-marker-' + shop.id}
-            position={{
-                lat: parseFloat(shop.lat),
-                lng: parseFloat(shop.lng),
-            }}
-            animation={this.state.selectedShop && this.state.selectedShop.id == shop.id && google.maps.Animation.BOUNCE}
-        />
-    )
+function toMarker(){
+    this.state.shops.map(function(shop){
+        if(!shop.marker){
+            shop.marker = new google.maps.Marker({
+                map:this.state.map,
+                animation: google.maps.Animation.DROP,
+                position: new google.maps.LatLng(shop.lat, shop.lng)
+            });
+        }
+    }.bind(this))
 }
 
 const GoogleMap = React.createClass({
-    mixins: [GoogleMapsMixin, Reflux.connect(ShopsStore)],
+    mixins: [Reflux.connect(ShopsStore)],
+    getInitialState(){
+        return {
+            map: false,
+            me: false
+        }
+    },
+    componentWillUpdate(){
+        if(this.state.selectedShop.marker)
+            this.state.selectedShop.marker.setAnimation(null);
+    },
+    componentDidUpdate(){
+        toMarker.apply(this);
+
+        if(this.state.selectedShop.marker)
+            this.state.selectedShop.marker.setAnimation(google.maps.Animation.BOUNCE);
+    },
+    componentDidMount(){
+        var lat = -33.43;
+        var lng = -70.62;
+
+        var centerPoint = new google.maps.LatLng(lat, lng);
+
+        var mapOptions = {
+            center: centerPoint,
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: false,
+            zoomControl: true,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.TOP_RIGHT
+            }
+        };
+
+        this.setState({map: new google.maps.Map(document.getElementById('map'), mapOptions)});
+    },
     render() {
         return (
-            <div>
-                <Map
-                    className="map"
-                    ref="map"
-                    center={new google.maps.LatLng(-33.4367715, -70.6276278)}
-                    zoom={14}
-                />
-                {this.state.shops.map(generateMarker.bind(this))}
+            <div className="map-container">
+                <div id="map"></div>
             </div>
         )
     }
 });
 
-const GoogleMapContainer = React.createClass({
-    getInitialState(){
-        return {
-            gmaps: false
-        }
-    },
-    componentDidMount() {
-        const map = <GoogleMap googleMapsApi={google.maps} />;
-        this.setState({gmaps: map});
-    },
-    render () {
-        return this.state.gmaps;
-    }
-})
-
-export default GoogleMapContainer;
+export default GoogleMap;
