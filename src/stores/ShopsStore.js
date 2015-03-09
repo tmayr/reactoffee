@@ -13,7 +13,10 @@ var mapCenter = {
 
 const ShopsStore = Reflux.createStore({
     listenables: [Actions],
-    onReceiveItems(){},
+    onSelectedItem(id){
+        var selectedShop = _.first(shops, function(shop){ return shop.id == id });
+        this.trigger({selectedShop: selectedShop})
+    },
     onAcceptedGeolocation(data){
         mapCenter.latitude = data.lat;
         mapCenter.longitude = data.lng;
