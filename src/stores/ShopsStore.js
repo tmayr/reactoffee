@@ -14,7 +14,8 @@ var mapCenter = {
 const ShopsStore = Reflux.createStore({
     listenables: [Actions],
     onSelectedItem(id){
-        var selectedShop = _.first(shops, function(shop){ return shop.id == id });
+        var selectedShop = _.find(shops, function(shop){ return shop.id == id });
+        console.log(selectedShop)
         this.trigger({selectedShop: selectedShop})
     },
     onAcceptedGeolocation(data){
@@ -34,7 +35,7 @@ const ShopsStore = Reflux.createStore({
         });
     },
     getInitialState(){
-        return {shops: this.updateShopsByDistance()}
+        return {shops: this.updateShopsByDistance(), selectedShop: {}}
     }
 });
 
