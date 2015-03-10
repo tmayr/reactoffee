@@ -1,7 +1,7 @@
 const React = require("react");
 const Router = require('react-router');
 
-const Actions = require('../actions/Actions');
+const Actions = require('../actions/actions');
 
 const Header = require("./Header");
 const GoogleMap = require('./GoogleMap');

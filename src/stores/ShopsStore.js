@@ -1,6 +1,6 @@
 const React = require('react');
 const Reflux = require('reflux');
-const Actions = require('../actions/Actions');
+const Actions = require('../actions/actions');
 const haversine = require('haversine');
 const _ = require('underscore');
 

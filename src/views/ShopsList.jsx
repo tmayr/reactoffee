@@ -2,7 +2,7 @@ const React = require('react');
 const Reflux = require('reflux');
 
 const ShopsStore = require('../stores/ShopsStore');
-const Actions = require('../actions/Actions');
+const Actions = require('../actions/actions');
 
 const ListItem = React.createClass({
     render(){
