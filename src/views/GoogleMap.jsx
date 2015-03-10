@@ -9,6 +9,7 @@ function toMarker(){
             shop.marker = new google.maps.Marker({
                 map:this.state.map,
                 animation: google.maps.Animation.DROP,
+                icon: '/img/marker.png',
                 position: new google.maps.LatLng(shop.lat, shop.lng)
             });
         }
@@ -28,12 +29,10 @@ const GoogleMap = React.createClass({
         }
     },
     componentWillUpdate(){
-        console.log('will update')
         if(this.state.selectedShop.marker)
             this.state.selectedShop.marker.setAnimation(null);
     },
     onSelectedShop(){
-        console.log('onselected')
         if(this.state.selectedShop.marker){
             this.state.selectedShop.marker.setAnimation(google.maps.Animation.BOUNCE);
             this.state.map.setCenter(this.state.selectedShop.marker.position);
@@ -41,6 +40,14 @@ const GoogleMap = React.createClass({
     },
     onAcceptedGeolocation(){
         this.state.map.setCenter(new google.maps.LatLng(this.state.me.lat, this.state.me.lng))
+
+        var meMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(this.state.me.lat, this.state.me.lng),
+            icon: '/img/circle.png'
+        });
+
+        meMarker.setMap(this.state.map);
+        this.setState({me: {marker: meMarker}});
     },
     componentDidUpdate(){
         toMarker.apply(this);
