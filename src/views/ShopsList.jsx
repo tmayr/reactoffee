@@ -7,7 +7,20 @@ const Actions = require('../actions/Actions');
 const ListItem = React.createClass({
     render(){
         var shop = this.props.shop;
-        return <li onClick={Actions.selectedShop.bind(this, shop.id)}>{shop.name} - {shop.distance}m</li>
+        return (
+            <li onClick={Actions.selectedShop.bind(this, shop.id)}>
+                <div className="shop-list-picture" style={{backgroundImage: 'url('+shop.image_url+')'}}>
+                    <a href={shop.image_url} target="_blank">
+                        o
+                    </a>
+                </div>
+                <div className="shop-list-meta">
+                    <span className="shop-list-name">{shop.name}</span>
+                    <span className="shop-list-address">{shop.address}</span>
+                    <span className="shop-list-distance"><i className="fa fa-walk"></i>{shop.distance}m</span>
+                </div>
+            </li>
+        );
     }
 })
 
