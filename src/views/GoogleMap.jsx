@@ -18,7 +18,8 @@ function toMarker(){
 const GoogleMap = React.createClass({
     mixins: [
         Reflux.connect(ShopsStore),
-        Reflux.listenTo(ShopsStore,"onAcceptedGeolocation")
+        Reflux.listenTo(ShopsStore,"onAcceptedGeolocation"),
+        Reflux.listenTo(ShopsStore,"onSelectedShop")
     ],
     getInitialState(){
         return {
@@ -27,17 +28,22 @@ const GoogleMap = React.createClass({
         }
     },
     componentWillUpdate(){
+        console.log('will update')
         if(this.state.selectedShop.marker)
             this.state.selectedShop.marker.setAnimation(null);
+    },
+    onSelectedShop(){
+        console.log('onselected')
+        if(this.state.selectedShop.marker){
+            this.state.selectedShop.marker.setAnimation(google.maps.Animation.BOUNCE);
+            this.state.map.setCenter(this.state.selectedShop.marker.position);
+        }
     },
     onAcceptedGeolocation(){
         this.state.map.setCenter(new google.maps.LatLng(this.state.me.lat, this.state.me.lng))
     },
     componentDidUpdate(){
         toMarker.apply(this);
-
-        if(this.state.selectedShop.marker)
-            this.state.selectedShop.marker.setAnimation(google.maps.Animation.BOUNCE);
     },
     componentDidMount(){
         var lat = -33.43;

@@ -7,7 +7,7 @@ const Actions = require('../actions/Actions');
 const ListItem = React.createClass({
     render(){
         var shop = this.props.shop;
-        return <li onClick={Actions.selectedItem.bind(this, shop.id)}>{shop.name} - {shop.distance}m</li>
+        return <li onClick={Actions.selectedShop.bind(this, shop.id)}>{shop.name} - {shop.distance}m</li>
     }
 })
 

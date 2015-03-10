@@ -1,8 +1,8 @@
 const Reflux = require('reflux');
 
 const Actions = Reflux.createActions([
-    'selectedItem',
-    'acceptedGeolocation'
+    'selectedShop',
+    'acceptedGeolocation',
 ]);
 
 export default Actions;
