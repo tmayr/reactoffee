@@ -31,10 +31,10 @@ const ShopsStore = Reflux.createStore({
     },
     updateShopsByDistance(){
         return _.sortBy(shops, function(shop){
-            shop.distance = haversine(mapCenter, {
+            shop.distance = Math.ceil(haversine(mapCenter, {
                 'latitude': shop.lat,
                 'longitude': shop.lng
-            }, {unit: 'm'});
+            }) * 1000);
 
             return shop.distance;
         }.bind(this));
